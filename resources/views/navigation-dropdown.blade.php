@@ -1,6 +1,6 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white shadow ">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -9,7 +9,11 @@
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
+                <div class="flex-shrink-0 flex items-center ml-2 text-xl sm:text-2xl">
+                    <a href="{{ route('dashboard') }}">
+                        {{ __('IreneGram') }}
+                    </a>
+                </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -23,15 +27,21 @@
                     </x-jet-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                        {{ __('home') }}
+                    </x-jet-nav-link>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-jet-dropdown align="right" width="48">
+            <div class="hidden sm:flex sm:items-center sm:ml-6 ">
+                <x-jet-dropdown align="right" width="48 ">
                     <x-slot name="trigger">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{__('/storage/')}}{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" />
                             </button>
                         @else
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -123,15 +133,21 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="pt-2 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
 
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="pt-1 pb-2 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('test') }}" :active="request()->routeIs('test')">
                 {{ __('Test') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-1 pb-2 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -139,7 +155,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    <img class="h-10 w-10 rounded-full" src="{{__('/storage/')}}{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" />
                 </div>
 
                 <div class="ml-3">
