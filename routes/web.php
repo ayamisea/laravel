@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/test', function () {
 })->name('test');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
-    return view('home');
+    return view('home',[
+        'user' => Auth::user(),
+    ]);
 })->name('home');
+
+Route::get('/profile/{username}',[ProfileController::class,'index']);

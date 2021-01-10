@@ -16,19 +16,20 @@
                     <div class="max-w-xl bg-white overflow-hidden shadow-lg sm:rounded-lg pt-4 pb-4 mb-5">
                         <div class="max-w-3xl mx-auto grid md:grid-cols-3 items-center ">
                             <div class="mb-5 hidden md:block justify-items-center">
-                                <img class="h-32 w-32 rounded-full mx-auto" src="{{__('/storage/')}}{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" />
+                                <img class="h-32 w-32 rounded-full mx-auto" src="{{ "/storage/".$user->profile_photo_path }}" alt="{{ $user->name }}" />
                             </div>
         
                             <div class="mr-6 ml-6 md:ml-0 col-span-2 ">
                                 
                                 <div class="flex mb-3 ">
                                     <div class="block md:hidden ">
-                                        <img class="h-15 w-15 object-cover rounded-full" src="{{__('/storage/')}}{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" />
+                                        <img class="h-15 w-15 object-cover rounded-full" src="{{ '/storage/'.$user->profile_photo_path }}" alt="{{ $user->name }}" />
                                     </div>
                                     <div class="md:ml-0 ml-5">
-                                        <div class="flex mb-1">
-                                            <h2 class=" font-bold sm:text-lg text-base">{{ Auth::user()->name }}</h2>
-                                            <button class=" w-auto p-1 ml-5 items-center justify-center rounded-md bg-black text-white text-xs" type="submit">追蹤</button>
+                                        <div class="flex mb-1 items-stretch">
+                                            <h2 class="self-center font-bold sm:text-lg text-base">{{ $user->name }}</h2>
+                                            <p class="ml-3 self-center text-xs">{{ '@'.$user->username }}</p>
+                                            <button class="self-center w-auto p-1 ml-5 items-center justify-center rounded-md bg-black text-white text-xs" type="submit">追蹤</button>
                                         </div>
                                         <div class="flex gap-4 sm:text-sm text-xs">
                                             <p>10 貼文</p>
@@ -56,11 +57,11 @@
                             <div class="max-w-3xl flex  mb-3 justify-between">
                                 <div class="flex items-stretch">
                                     <div class="mr-3 self-center">
-                                        <img class="shadow h-10 w-10 rounded-full mx-auto" src="{{__('/storage/')}}{{ Auth::user()->profile_photo_path }}" alt="{{ Auth::user()->name }}" />
+                                        <img class="shadow h-10 w-10 rounded-full mx-auto" src="{{ '/storage/'.$user->profile_photo_path }}" alt="{{ $user->name }}" />
                                     </div>
                 
                                     <div class="self-center">
-                                        <h2 class="font-bold text-base">{{ Auth::user()->name }}</h2>
+                                        <h2 class="font-bold text-base">{{ $user->name }}</h2>
                                         <p class="text-xs">2021/01/16 13:24 </p>
                                     </div>
                                 </div>
