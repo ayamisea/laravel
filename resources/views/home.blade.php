@@ -6,32 +6,34 @@
         </h2>
     </x-slot>
 
-    <div class="py-6 grid justify-center">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+    <div class=" py-6  max-w-4xl mx-auto sm:px-6 lg:px-8 ">
+
             @if($errors->any())
-                <div class="bg-red-300 rounded-md py-2 px-3">
-                    <button class="float-right text-white hover:text-black" onclick="this.parentElement.style.display='none';">&times;</button> 
-                    <p class="font-bold">失敗</p>
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                    
-                </div>
+            <div class="bg-red-300 rounded-md py-2 px-3">
+                <button class="float-right text-white hover:text-black" onclick="this.parentElement.style.display='none';">&times;</button> 
+                <p class="font-bold">失敗</p>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                
+            </div>
             @endif
-            <div class="flex py-5 lg:grid grid-cols-3 md:gap-5">
+            <div class="flex py-5 lg:grid grid-cols-3 md:gap-5 justify-around">
                 
                 <!--left-->
-                <div class=" lg:col-span-2 w-full ">
+                <div class=" max-w-xl lg:col-span-2 w-full  grid ">
 
                     <!--Profile =========================== -->
-                    <div class="max-w-xl bg-white overflow-hidden shadow-lg sm:rounded-lg pt-4 pb-4 mb-5">
+                    <div class=" bg-white overflow-hidden shadow-lg sm:rounded-lg py-3 mb-5">
                         <div class="max-w-3xl mx-auto grid md:grid-cols-3 items-center ">
-                            <div class="mb-5 hidden md:block justify-items-center">
+                            <div class="  mb-5 hidden md:block justify-items-center">
                                 
-                                <img class="h-32 w-32 rounded-full mx-auto" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
-                                <div class="grid justify-items-stretch mt-4">
+                                <img class="h-32 w-32 rounded-full mx-auto mb-4" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+                                
+                                
+                                <div class= grid justify-items-stretch ">
                                     @if(Auth::user() === $user)
                                     <button class="justify-self-center px-1 modal-open w-auto bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold rounded-md text-sm">編輯簡介</button>
                                     @endif
@@ -39,7 +41,7 @@
                                 
                             </div>
         
-                            <div class="mr-6 ml-6 md:ml-0 col-span-2 ">
+                            <div class=" grid justify-around mx-6 md:ml-0 col-span-2 ">
                                 
                                 <div class="flex mb-3 ">
                                     <div class="block md:hidden ">
@@ -82,9 +84,6 @@
                                     @endif
                                 </div>
                             </div>
-                            
-              
-
                         </div>    
                     </div>
 
@@ -138,7 +137,7 @@
                     
                     @if($posts->count())
                         @foreach ($posts as $post)
-                        <div class="grid max-w-xl bg-white h-auto w-auto rounded-sm p-3 pb-1 pt-1 mb-1.5">
+                        <div class="grid max-w-xl bg-white h-auto w-auto rounded-sm p-3 pb-1 pt-1 mb-3">
                             
                             <div class="place-self-start w-full">
                             <!--Author-->
@@ -198,6 +197,7 @@
                                     <div class="flex">
                                         <!--like-->
                                         <form action="" method="post">
+                                            @csrf
                                             <button type="submit" class="hover:opacity-75 focus:outline-none">
                                                 <svg class="text-red-500 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
                                             </button>
@@ -205,6 +205,7 @@
 
                                         <!--unlike-->
                                         <form action="" method="post">
+                                            @csrf
                                             <button type="submit" class="hover:opacity-75 focus:outline-none">
                                                 <svg class="text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                                             </button>
@@ -238,7 +239,7 @@
                         </div>
                     @endif
                     
-                    
+                
                 </div>
 
                 <!--Right-->
@@ -252,7 +253,7 @@
 
             </div>
             
-        </div>
+        
     </div>
 
     <!--Modal-->
