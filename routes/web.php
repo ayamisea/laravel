@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +32,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     ]);
 })->name('home');
 
-Route::get('/profile/{username}',[ProfileController::class,'index']);
+Route::get('/{username}',[ProfileController::class,'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/home', [ProfileController::class,'store'])->name('update_profile');
