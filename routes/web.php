@@ -26,12 +26,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/test', function () {
     return view('test');
 })->name('test');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
-    return view('home',[
-        'user' => Auth::user(),
-    ]);
-})->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->get('/home', [PostController::class,'index'])->name('home');
 
 Route::get('/{username}',[ProfileController::class,'index']);
 
-Route::middleware(['auth:sanctum', 'verified'])->post('/home', [ProfileController::class,'store'])->name('update_profile');
+Route::middleware(['auth:sanctum', 'verified'])->post('/update-profile', [ProfileController::class,'store'])->name('update_profile');
+Route::middleware(['auth:sanctum', 'verified'])->post('/add-post', [PostController::class,'store'])->name('add_post');

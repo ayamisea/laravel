@@ -16,8 +16,10 @@ class ProfileController extends Controller
         if($username === Auth::user()->username) {
             return redirect()->route('home');
         }
+        $posts = $user->posts()->orderBy('updated_at','desc')->paginate(10);
         return view('home',[
             'user' => $user,
+            'posts' => $posts,
         ]);
     }
     public function store(Request $request){
@@ -28,7 +30,7 @@ class ProfileController extends Controller
         ]);
         
         Auth::user()->profile()->update($prof);
-        return redirect()->route('home');
+        return back();
     }
 
 }
