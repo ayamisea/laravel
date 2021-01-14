@@ -16,7 +16,7 @@ class ProfileController extends Controller
         if($username === Auth::user()->username) {
             return redirect()->route('home');
         }
-        $posts = $user->posts()->orderBy('updated_at','desc')->paginate(10);
+        $posts = $user->posts()->with('user')->orderBy('updated_at','desc')->paginate(10);
         return view('home',[
             'user' => $user,
             'posts' => $posts,

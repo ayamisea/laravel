@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Auth::user()->posts()->orderBy('updated_at','desc')->paginate(10)->onEachSide(0);
+        $posts = Auth::user()->posts()->with('user')->orderBy('updated_at','desc')->paginate(10)->onEachSide(0);
         
         return view('home',[
             'user' => Auth::user(),
