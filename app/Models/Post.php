@@ -14,7 +14,15 @@ class Post extends Model
         'content',
         
     ];
-    
+    public function likeBy(User $user){
+        return $this->likes->contains('user_id',$user->id); 
+        //ture/false
+    }
+    public function ownedBy(User $user)
+    {
+        return $this->user->id === $user->id;
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
