@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [FollowController::class,'showposts'])->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/test', function () {
     return view('test');
@@ -41,3 +40,8 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/update-post',[PostContro
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/like-post/{post}', [PostLikeController::class,'store'])->name('like_post');
 Route::middleware(['auth:sanctum', 'verified'])->delete('/unlike-post/{post}', [PostLikeController::class,'destroy'])->name('unlike_post');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/follow-profile/{profile}', [FollowController::class,'store'])->name('follow_profile');
+Route::middleware(['auth:sanctum', 'verified'])->delete('/unfollow-profile/{profile}', [FollowController::class,'destroy'])->name('unfollow_profile');
+Route::get('/profile/{username}/follow',[FollowController::class,'follow'])->name('follow');
+Route::get('/profile/{username}/follower',[FollowController::class,'follower'])->name('follower');

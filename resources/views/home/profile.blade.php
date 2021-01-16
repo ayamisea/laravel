@@ -24,12 +24,33 @@
                 <div class="flex mb-1 items-stretch">
                     <h2 class="self-center font-bold sm:text-lg text-base">{{ $user->name }}</h2>
                     <p class="hidden md:block ml-3 self-center text-xs">{{ '@'.$user->username }}</p>
-                    <button class="self-center w-auto p-1 ml-5 items-center justify-center rounded-md bg-black text-white text-xs" type="submit">追蹤</button>
+                    @auth
+                    @if(Auth::user()!==$user)
+                        @if($user->profile->followBy(Auth::user()))
+                        <!-- ToUnfollow-->
+                        <form action="{{route('unfollow_profile',$user->profile)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="self-center w-auto p-1 ml-5 items-center justify-center rounded-md bg-black text-white text-xs hover:opacity-75 focus:outline-none">
+                                取消追蹤
+                            </button>
+                        </form>
+                        @else
+                        <!-- ToFollow-->
+                        <form action="{{ route('follow_profile',$user->profile)}}" method="post">
+                            @csrf
+                            <button type="submit" class="self-center w-auto p-1 ml-5 items-center justify-center rounded-md bg-black text-white text-xs hover:opacity-75 focus:outline-none">
+                                追蹤
+                            </button>
+                        </form>
+                        @endif
+                    @endif
+                    @endauth
                 </div>
                 <div class="flex gap-4 sm:text-sm text-xs">
-                    <span class="grid justify-items-center sm:flex"><p class="sm:mr-1">{{$user->posts->count()}}</p> <p>貼文</p> </span>
-                    <span class="grid justify-items-center sm:flex"><p class="sm:mr-1">20</p> <p>粉絲</p></span>
-                    <span class="grid justify-items-center sm:flex"><p class="sm:mr-1">75</p> <p>追蹤中</p></span>
+                    <span class="grid justify-items-center sm:flex"><p class="sm:mr-1"><a href="{{route('profile',$user->username)}}">{{$user->posts->count()}}</a></p> <p>貼文</p> </span>
+                    <span class="grid justify-items-center sm:flex"><p class="sm:mr-1"><a href="{{route('follower',$user->username)}}">{{$user->profile->follows->count()}}</a></p> <p>粉絲</p></span>
+                    <span class="grid justify-items-center sm:flex"><p class="sm:mr-1"><a href="{{route('follow',$user->username)}}">{{$user->follows->count()}}</a></p> <p>追蹤中</p></span>
                 </div>
             </div>
             

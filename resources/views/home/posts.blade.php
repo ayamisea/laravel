@@ -19,52 +19,48 @@
                 
 
                 <div class="self-center flex gap-3 items-stretch">
+                    @auth
                     @if(Auth::user()!==$user)
                         <button class="self-center w-auto p-1 items-center justify-center rounded-md bg-gray-400 text-white text-xs" type="submit">追蹤</button>
                     @endif
+                    @endauth
                     <!-- Post Manipulation -->
+                    @auth
+                    @if($post->ownedBy(Auth::user()))
                     <x-jet-dropdown align="right" width="48 ">
+                        
                         <x-slot name="trigger">
+                            
                             <button type="submit" class="hover:opacity-75 focus:outline-none">
                                 <svg class="self-center text-gray-400 w-5 h-5 -mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                             </button>
+                            
                         </x-slot>
+                        
                         <x-slot name="content">
-                            @auth
-                            @if($post->ownedBy(Auth::user()))
-
-                                <div class="block px-1 py-1 text-xs text-gray-400">
-                                    <a href="{{route('edit_post',$post)}}">
-                                        <button class="hover:bg-gray-50 w-full">
-                                            <p>編輯</p> 
-                                        </button>
-                                    </a>
-                                    
-                                </div>
-                                <div class="block px-1 py-1 text-xs text-gray-400">
-                                    <form action="{{route('delete_post',$post)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="hover:bg-gray-50 w-full" type="submit">
-                                            <p>刪除</p> 
-                                        </button>
-                                    </form>
-                                </div>
-                            @else
-                                <div class="block px-4 py-2 text-xs text-gray-400">
-                                    <form action="" method="post">
-                                        @csrf
-                                        <button type="submit">
-                                            收藏
-                                        </button>
-                                    </form>
-                                </div>
-                            @endif
-                            @endauth
                             
 
-                        </x-slot>
+                            <div class="block px-1 py-1 text-xs text-gray-400">
+                                <a href="{{route('edit_post',$post)}}">
+                                    <button class="hover:bg-gray-50 w-full">
+                                        <p>編輯</p> 
+                                    </button>
+                                </a>
+                                
+                            </div>
+                            <div class="block px-1 py-1 text-xs text-gray-400">
+                                <form action="{{route('delete_post',$post)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="hover:bg-gray-50 w-full" type="submit">
+                                        <p>刪除</p> 
+                                    </button>
+                                </form>
+                            </div>
+                    </x-slot>
                     </x-jet-dropdown>
+                    @endif
+                    @endauth
                 </div>
             </div>  
         
@@ -86,10 +82,12 @@
                     @endfor
                 </div>
                 <div class="justify-end mr-4 self-center  text-gray-400">
+                    <!--
                     <a class="text-xs flex gap-1" href="#">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"></path></svg>
                         <p>查看合集 ...</p> 
                     </a>
+                -->
                     
                 </div>
                 
