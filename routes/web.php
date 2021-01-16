@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\PostMessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,6 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/follow-profile/{profile}
 Route::middleware(['auth:sanctum', 'verified'])->delete('/unfollow-profile/{profile}', [FollowController::class,'destroy'])->name('unfollow_profile');
 Route::get('/profile/{username}/follow',[FollowController::class,'follow'])->name('follow');
 Route::get('/profile/{username}/follower',[FollowController::class,'follower'])->name('follower');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/add-message', [PostMessageController::class,'store'])->name('add_message');
+Route::middleware(['auth:sanctum', 'verified'])->delete('/delete-message/{message}', [PostMessageController::class,'destroy'])->name('delete_message');
