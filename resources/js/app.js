@@ -32,7 +32,6 @@ document.onkeydown = function(evt) {
     }
 };
 
-
 function toggleModal () {
     const body = document.querySelector('body')
     const modal = document.querySelector('.modal')
@@ -40,3 +39,5 @@ function toggleModal () {
     modal.classList.toggle('pointer-events-none')
     body.classList.toggle('modal-active')
 }  
+
+

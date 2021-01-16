@@ -1,6 +1,8 @@
 @if($posts->count())
     @foreach ($posts as $post)
-    <div class="grid max-w-xl bg-white h-auto w-auto rounded-sm p-3 pb-1 pt-1 mb-3">
+    <ul class="grid max-w-xl  h-auto w-auto rounded-sm mb-2 " x-data="{selected:null}">
+    <li class="flex align-center flex-col">
+    <div class="grid max-w-xl bg-white h-auto w-auto rounded-sm p-3 pb-1 pt-1 ">
         
         <div class="place-self-start w-full">
         <!--Author-->
@@ -93,7 +95,7 @@
                 
             </div>
             <!--likes-->
-            <div class="flex text-sm border-t boader-grey-50 pt-1 justify-around">
+            <div class="flex text-sm border-t border-gray-200 pt-1 justify-around">
                 
                 <div class="flex">
                     @auth
@@ -124,20 +126,24 @@
                     
                 </div>
                 
+                <!--message-->
                 <div class="flex">
-                    <svg class="text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                   
+                    <button  @click="selected !== 1 ? selected = 1 : selected = null" class="hover:opacity-75 focus:outline-none">
+                        <svg class="text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    </button>
                     <span class="ml-1">20</span>
                 </div>
 
-                <div class="flex">
-                    <svg class="text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    <span class="ml-1">5</span>
-                </div>
+                
                 
             </div>
         </div>
     </div>
-
+    @include('home.post-message')
+    </li>
+    </ul> 
+    
     @endforeach
     <div class="grid max-w-xl h-auto w-auto rounded-sm p-3 pb-1 pt-1 mb-1.5">
         {{ $posts->links()}}
