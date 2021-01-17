@@ -80,8 +80,7 @@ class PostController extends Controller
             }
             else{
                 $posts = Post::orderByDesc('updated_at')->with('user','likes','messages')->paginate(10)->onEachSide(0);
-            }
-            
+            } 
         }
         return view('search',[
             'posts' => $posts,
