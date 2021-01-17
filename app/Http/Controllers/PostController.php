@@ -53,4 +53,39 @@ class PostController extends Controller
         }
         return redirect()->route('home');
     }
+
+    public function search(Request $request){
+        $query = $request->search;
+        
+        if($query){
+            $posts = Post::where('title','like',"%{$query}%")
+            ->orWhere('content','like',"% {$query} %")
+            ->orWhere('content','like',"{$query} %")
+            ->orWhere('content','like',"% {$query}.")
+            ->orWhere('content','like',"% {$query}");
+            
+        }
+        if($request->sort_type){
+            if($query){
+                $posts = $posts->withCount('likes')->orderBy('likes_count', 'desc')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+            }
+            else{
+                $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+            }
+            
+        }
+        else{
+            if($query){
+                $posts = $posts->orderByDesc('updated_at')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+            }
+            else{
+                $posts = Post::orderByDesc('updated_at')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+            }
+            
+        }
+        return view('search',[
+            'posts' => $posts,
+            'user' => Auth::user(),
+        ]);
+    }
 }

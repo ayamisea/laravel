@@ -3,17 +3,22 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
+                
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
+
+                
                 <div class="flex-shrink-0 flex items-center ml-2 text-xl sm:text-2xl">
                     <a href="{{ route('dashboard') }}">
                         {{ __('IreneGram') }}
                     </a>
                 </div>
+
+                @auth
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -22,8 +27,8 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('test') }}" :active="request()->routeIs('test')">
-                        {{ __('Test') }}
+                    <x-jet-nav-link href="{{ route('search') }}" :active="request()->routeIs('search')">
+                        {{ __('Search') }}
                     </x-jet-nav-link>
                 </div>
 
@@ -32,10 +37,27 @@
                         {{ __('home') }}
                     </x-jet-nav-link>
                 </div>
+                @else
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                            {{ __('Login') }}
+                        </x-jet-nav-link>
+                    </div>
+                
 
+                    @if (Route::has('register'))
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                                {{ __('Register') }}
+                            </x-jet-nav-link>
+                        </div>
+                        
+                    @endif
+                @endauth
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6 ">
                 <x-jet-dropdown align="right" width="48 ">
                     <x-slot name="trigger">
@@ -118,7 +140,7 @@
                     </x-slot>
                 </x-jet-dropdown>
             </div>
-
+            @endauth
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -128,11 +150,15 @@
                     </svg>
                 </button>
             </div>
+            
+
+
         </div>
     </div>
-
+    
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        @auth
         <div class="pt-2 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
@@ -140,8 +166,8 @@
         </div>
 
         <div class="pt-1 pb-2 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('test') }}" :active="request()->routeIs('test')">
-                {{ __('Test') }}
+            <x-jet-responsive-nav-link href="{{ route('search') }}" :active="request()->routeIs('search')">
+                {{ __('Search') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -150,8 +176,20 @@
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
-
+        @else
+            <div class="pt-1 pb-2 space-y-1">
+                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                    {{ __('Login') }}
+                </x-jet-responsive-nav-link>
+            </div>
+            <div class="pt-1 pb-2 space-y-1">
+                <x-jet-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                    {{ __('Register') }}
+                </x-jet-responsive-nav-link>
+            </div>
+        @endauth
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="flex-shrink-0">
@@ -217,5 +255,7 @@
                 @endif
             </div>
         </div>
+        @endauth
     </div>
+    
 </nav>

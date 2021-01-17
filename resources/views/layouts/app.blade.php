@@ -20,15 +20,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="fixed w-full z-10">
-            @auth
-                @livewire('navigation-dropdown')
-            @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                @endif
-            @endauth
+            @livewire('navigation-dropdown')
             
         </div>
         <div class="min-h-screen bg-gray-100 z-0">

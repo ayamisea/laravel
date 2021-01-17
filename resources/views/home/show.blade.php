@@ -40,7 +40,7 @@
 
                 <!--Right-->
                 <div class="lg:block hidden z-0">
-                    @include('home.bar')
+                    
                 </div>
 
             </div>

@@ -9,11 +9,15 @@
             <div class="max-w-3xl flex  mb-3 justify-between">
                 <div class="flex items-stretch">
                     <div class="mr-3 self-center">
+                        <a href="{{route('profile',$post->user->username)}}">
                         <img class="shadow h-10 w-10 rounded-full mx-auto" src="{{ $post->user->profile_photo_url }}" alt="{{ $user->name }}" />
+                        </a> 
                     </div>
 
                     <div class="self-center">
-                        <h2 class="font-bold text-base">{{ $post->user->name }}</h2>
+                        <a href="{{route('profile',$post->user->username)}}">
+                            <h2 class="font-bold text-base">{{ $post->user->name }}</h2>
+                        </a>
                         <p class="text-xs">{{ $post->created_at->diffForHumans()}} </p>
                     </div>
                 </div>
@@ -79,12 +83,14 @@
             <!--tags-->
             <div class=" mb-2 flex justify-between items-stretch">
                 <div class="self-center">
-                    @for($j=1;$j<3;$j++)
+                    <!--
+                   
                     <a class="bg-red-50 rounded mr-1 text-xs pl-1 pr-1" href="#" alt="tagValue" >tagitem</a>
-                    @endfor
+                    
+                    -->
                 </div>
                 <div class="justify-end mr-4 self-center  text-gray-400">
-                    <!--
+                <!--
                     <a class="text-xs flex gap-1" href="#">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"></path></svg>
                         <p>查看合集 ...</p> 
@@ -94,6 +100,8 @@
                 </div>
                 
             </div>
+
+            
             <!--likes-->
             <div class="flex text-sm border-t border-gray-200 pt-1 justify-around">
                 
@@ -149,11 +157,16 @@
     
     @endforeach
     <div class="grid max-w-xl h-auto w-auto rounded-sm p-3 pb-1 pt-1 mb-1.5">
-        {{ $posts->links()}}
+        {{ $posts->appends(['search' => request()->search,'sort_type'=>request()->sort_type])->links()}}
     </div>
     
 @else 
     <div class="flex justify-center">
-        <span>沒有任何貼文</span>
+        @if(request()->search)
+            <span>找不到符合搜尋字詞「{{request()->search}}」的貼文</span>
+        @else
+            <span>沒有任何貼文</span>
+        @endif
+        
     </div>
 @endif

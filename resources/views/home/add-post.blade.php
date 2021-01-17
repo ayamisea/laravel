@@ -24,8 +24,8 @@
                             </div>
                             <!-- Tags -->
                             <div class="col-span-6 sm:col-span-4">
-                                <label for="tag">標籤</label>
-                                <input id="tag" name="tag" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500  w-full shadow-sm p-1 border border-gray-300 rounded-md" type="text">
+                                <!--<label for="tag">標籤</label>-->
+                                <input id="tag" type="hidden" name="tag" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500  w-full shadow-sm p-1 border border-gray-300 rounded-md" type="text">
                             </div>  
                             
                         </div>

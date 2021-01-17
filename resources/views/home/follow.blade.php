@@ -61,7 +61,9 @@
        
         @endforeach
         @else
-        沒有資料
+        <div class="flex justify-center">
+            <span>沒有任何資料</span> 
+        </div>
         @endif
            
     </div>
