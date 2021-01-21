@@ -25,18 +25,8 @@
         </div>
         <div class="min-h-screen bg-gray-100 z-0">
             
-
-            <!-- Page Heading -->
-            
-            <header class="">
-                <div class="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-            
-
             <!-- Page Content -->
-            <main>
+            <main class="max-w-5xl mx-auto pt-14 px-4 sm:px-6 lg:px-8">
                 {{ $slot }}
             </main>
         </div>

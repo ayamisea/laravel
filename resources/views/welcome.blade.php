@@ -23,11 +23,7 @@
     </head>
     <body class="">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center sm:pt-0">
-            
-
-            
-        
-              
+  
             <main class="mt-10">
                 
                 <h1 class="text-center text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
