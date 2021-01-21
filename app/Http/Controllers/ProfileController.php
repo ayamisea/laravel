@@ -34,10 +34,9 @@ class ProfileController extends Controller
         return back();
     }
     public function deletePhoto(){
+        $result = \Cloudinary\Uploader::destroy( $public_id = Auth::user()->profile_photo_path);
         Auth::user()->profile_photo_path=null;
         Auth::user()->save();
-
-        $result = \Cloudinary\Uploader::destroy( $public_id = $photo_id);
         return back();
     }
 
