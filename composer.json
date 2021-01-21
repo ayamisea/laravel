@@ -17,12 +17,13 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "livewire/livewire": "^2.0"
+        "livewire/livewire": "^2.0",
+        "cloudinary/cloudinary_php": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.5",
-        
+
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",

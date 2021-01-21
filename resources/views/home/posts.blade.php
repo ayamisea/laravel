@@ -10,7 +10,7 @@
                 <div class="flex items-stretch">
                     <div class="mr-3 self-center">
                         <a href="{{route('profile',$post->user->username)}}">
-                        <img class="shadow h-10 w-10 rounded-full mx-auto" src="{{ $post->user->profile_photo_url }}" alt="{{ $user->name }}" />
+                        <img class="shadow h-10 w-10 rounded-full mx-auto" src="{{cloudinary_url($post->user->profile_photo_path)??$post->user->profile_photo_url}}" alt="{{ $user->name }}" />
                         </a> 
                     </div>
 

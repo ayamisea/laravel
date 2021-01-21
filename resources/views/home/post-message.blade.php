@@ -24,7 +24,7 @@
 
                             <div class=" flex flex-row items-center p-2 mx-2 ">
                                 <div class=" items-center justify-center h-10 w-10 flex-shrink-0">
-                                    <img class="shadow rounded-full" src="{{ $message_user->profile_photo_url }}" alt="{{ $user->name }}" />
+                                    <img class="shadow rounded-full" src="{{cloudinary_url($message_user->profile_photo_path)??$message_user->profile_photo_url}}" alt="{{ $user->name }}" />
                                 </div>
                                 <div class="flex flex-col flex-grow ml-3">
                                     <div class="flex justify-between items-center gap-1">

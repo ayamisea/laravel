@@ -22,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [FollowController::class,'showposts'])->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/search',[PostController::class,'search'] )->name('search');
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/home', [PostController::c
 Route::get('/profile/{username}',[ProfileController::class,'index'])->name('profile');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/update-profile', [ProfileController::class,'store'])->name('update_profile');
+Route::middleware(['auth:sanctum', 'verified'])->get('/delete-profile-photo', [ProfileController::class,'deletePhoto'])->name('delete_profile_photo');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/add-post', [PostController::class,'store'])->name('add_post');
 Route::middleware(['auth:sanctum', 'verified'])->delete('/delete-post/{post}', [PostController::class,'destroy'])->name('delete_post');

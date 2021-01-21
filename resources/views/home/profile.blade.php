@@ -2,7 +2,7 @@
 <div class="max-w-3xl mx-auto grid md:grid-cols-3 items-center ">
     <div class="  mb-5 hidden md:block justify-items-center">
         
-        <img class="h-32 w-32 rounded-full mx-auto mb-4" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+        <img class="h-32 w-32 rounded-full mx-auto mb-4" src="{{cloudinary_url($user->profile_photo_path)??$user->profile_photo_url}}" alt="{{ $user->name }}" />
         
         
         <div class= grid justify-items-stretch ">
@@ -17,7 +17,7 @@
         
         <div class="flex mb-3 ">
             <div class="block md:hidden ">
-                <img class="h-15 w-15 object-cover rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+                <img class="h-15 w-15 object-cover rounded-full" src="{{cloudinary_url($user->profile_photo_path)??$user->profile_photo_url}}" alt="{{ $user->name }}" />
                 
             </div>
             <div class="md:ml-0 ml-5">

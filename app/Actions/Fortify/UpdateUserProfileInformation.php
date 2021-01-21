@@ -5,7 +5,9 @@ namespace App\Actions\Fortify;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\UploadedFile;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
+use Illuminate\Support\Str;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
@@ -24,9 +26,22 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'image', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
-
         if (isset($input['photo'])) {
-            $user->updateProfilePhoto($input['photo']);
+            $photo = new UploadedFile(
+                $input['photo']->getRealPath(),
+                $input['photo']->getClientOriginalName(),
+                $input['photo']->getMimeType()
+            );
+     
+            $options = [
+                'public_id' => 'profile_images/'.Str::random(40),
+            ];
+            
+            $results = \Cloudinary\Uploader::upload($photo,$options);
+            //dd($results['public_id']);
+            //$user->updateProfilePhoto($results['public_id']);
+            $user->profile_photo_path = $results['public_id'];
+            $user->save();
         }
 
         if ($input['email'] !== $user->email &&

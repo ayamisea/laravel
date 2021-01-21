@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Str;
 use App\Models\User;
 
 
@@ -30,6 +31,13 @@ class ProfileController extends Controller
         ]);
         
         Auth::user()->profile()->update($prof);
+        return back();
+    }
+    public function deletePhoto(){
+        Auth::user()->profile_photo_path=null;
+        Auth::user()->save();
+
+        $result = \Cloudinary\Uploader::destroy( $public_id = $photo_id);
         return back();
     }
 

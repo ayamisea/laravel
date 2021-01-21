@@ -13,7 +13,7 @@
         
         <div class="bg-white  flex items-center p-2 rounded-xl shadow border m-2">
             <div class="relative flex items-center space-x-4">
-              <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" class="w-16 h-16 rounded-full">
+              <img src="{{cloudinary_url($user->profile_photo_path)??$user->profile_photo_url}}" alt="{{ $user->name }}" class="w-16 h-16 rounded-full">
               
             </div>
             <div class="flex-grow p-3">
