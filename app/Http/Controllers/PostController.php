@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Image;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function index(){
-        $posts = Auth::user()->posts()->with('user','likes')->orderBy('updated_at','desc')->paginate(10)->onEachSide(0);
+        $posts = Auth::user()->posts()->with('user','likes','images')->orderBy('updated_at','desc')->paginate(10)->onEachSide(0);
         
         return view('home.show',[
             'user' => Auth::user(),
@@ -20,18 +22,35 @@ class PostController extends Controller
 
         $request->validate([
             'content'=>'required',
+            'title'=>'required',
         ]);
         
-        Auth::user()->posts()->create([
+        $post = Auth::user()->posts()->create([
             'title' => $request->title,
             'content' => $request->content,
         ]);
-
+        
+        if($images = $request->file('images')){
+            foreach($images as $img){
+                $options = [
+                    'public_id' => 'post_images/'.Str::random(40),
+                ];
+                $results = \Cloudinary\Uploader::upload($img,$options);
+                Image::create([
+                    'post_id' => $post->id,
+                    'filename' => $results['public_id'],
+                ]);
+            }
+        }
         return back();
     }
     
     public function destroy(Post $post) {
         if($post->ownedBy(Auth::user())){
+            foreach($post->images()->get() as $img){
+                $result = \Cloudinary\Uploader::destroy( $public_id = $img->filename);
+                $img->delete();
+            }
             $post->delete();
         }
         return back();
@@ -48,8 +67,36 @@ class PostController extends Controller
     public function update(Request $request){
         $post = Post::find($request->post_id);
         if($post and $post->ownedBy(Auth::user())){
-            $edit_p = $request->only(['title','content','tag']);
-            $post->update($edit_p);
+
+            if($request->delete_img_id and $img = $post->images()->find($request->delete_img_id)){
+                $result = \Cloudinary\Uploader::destroy( $public_id = $img->filename);
+                $img->delete();
+                return back()->withInput();
+            }
+            else{
+                $request->validate([
+                    'content'=>'required',
+                    'title'=>'required',
+                ]);
+      
+                if($images = $request->file('images')){
+                   
+                    foreach($images as $img){
+                        $options = [
+                            'public_id' => 'post_images/'.Str::random(40),
+                        ];
+                        $results = \Cloudinary\Uploader::upload($img,$options);
+                        Image::create([
+                            'post_id' => $post->id,
+                            'filename' => $results['public_id'],
+                        ]);
+                    }
+                }
+                //dd($request);
+                $edit_p = $request->only(['title','content','tag']);
+                $post->update($edit_p);
+            }
+            
         }
         return redirect()->route('home');
     }

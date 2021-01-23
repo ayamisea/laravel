@@ -5,7 +5,7 @@
     <div class="grid max-w-xl bg-white h-auto w-auto rounded-sm p-3 pb-1 pt-1 ">
         
         <div class="place-self-start w-full">
-        <!--Author-->
+            <!--Author-->
             <div class="max-w-3xl flex  mb-3 justify-between">
                 <div class="flex items-stretch">
                     <div class="mr-3 self-center">
@@ -70,13 +70,28 @@
                 </div>
             </div>  
         
-        <!--Content-->
+            <!--Content-->
             <div class="bg-white text-justify pr-3">
                 <h4 class="font-bold mt-0 md:text-lg text-md">{{$post->title}}</h4>
                 <span class="md:text-base text-sm ">
                     {{$post->content}}
                 </span>
+
+                
             </div >
+            <!--image-->
+            @if(count($post->images)) 
+            
+            <div class="pa-carousel-widget w-full h-64 mt-2"
+            style="display: none;">
+                @foreach($post->images()->get() as $image)
+                    <img data-src="{{cloudinary_url($image->filename)}}" >
+                @endforeach
+            </div>  
+            @endif
+            
+
+
         </div>
         
         <div class="place-self-end w-full mt-2">
@@ -170,3 +185,4 @@
         
     </div>
 @endif
+

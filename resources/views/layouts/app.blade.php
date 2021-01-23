@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        
         @livewireStyles
 
         <!-- Scripts -->
@@ -35,7 +35,8 @@
 
         @livewireScripts
 
-
-
+        <!--embed slideshow-->
+        <script src="https://cdn.jsdelivr.net/npm/publicalbum@latest/embed-ui.min.js" async></script>
+        <script src="/link/to/embed-ui.min.js" async></script>
     </body>
 </html>

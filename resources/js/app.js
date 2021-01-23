@@ -40,4 +40,3 @@ function toggleModal () {
     body.classList.toggle('modal-active')
 }  
 
-
