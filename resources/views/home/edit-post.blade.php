@@ -2,7 +2,20 @@
 
     <div class=" py-6  max-w-4xl mx-auto sm:px-6 lg:px-8 ">
         @if($post->ownedBy(Auth::user()))
-        
+            <!--Error messages ==================== -->
+            @if($errors->any())
+            <div class="max-w-xl bg-red-300 rounded-md py-2 px-3 mb-2">
+                <button class="float-right text-white hover:text-black" onclick="this.parentElement.style.display='none';">&times;</button> 
+                <p class="font-bold">失敗</p>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                
+            </div>
+            @endif
+
             <form action="{{route('update_post')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div x-show="selected == 0" class="grid max-w-xl bg-white h-auto w-auto rounded-sm pt-2 mb-3">

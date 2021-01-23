@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Auth::user()->posts()->with('user','likes','images')->orderBy('updated_at','desc')->paginate(10)->onEachSide(0);
+        $posts = Auth::user()->posts()->with('user','likes','images','messages')->orderBy('updated_at','desc')->paginate(10)->onEachSide(0);
         
         return view('home.show',[
             'user' => Auth::user(),
