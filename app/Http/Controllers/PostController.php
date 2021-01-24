@@ -114,19 +114,19 @@ class PostController extends Controller
         }
         if($request->sort_type){
             if($query){
-                $posts = $posts->withCount('likes')->orderBy('likes_count', 'desc')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+                $posts = $posts->withCount('likes')->orderBy('likes_count', 'desc')->with('user','likes','messages','images')->paginate(10)->onEachSide(0);
             }
             else{
-                $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+                $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->with('user','likes','messages','images')->paginate(10)->onEachSide(0);
             }
             
         }
         else{
             if($query){
-                $posts = $posts->orderByDesc('updated_at')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+                $posts = $posts->orderByDesc('updated_at')->with('user','likes','messages','images')->paginate(10)->onEachSide(0);
             }
             else{
-                $posts = Post::orderByDesc('updated_at')->with('user','likes','messages')->paginate(10)->onEachSide(0);
+                $posts = Post::orderByDesc('updated_at')->with('user','likes','messages','images')->paginate(10)->onEachSide(0);
             } 
         }
         return view('search',[
