@@ -24,11 +24,17 @@
 
                             <div class=" flex flex-row items-center p-2 mx-2 ">
                                 <div class=" items-center justify-center h-10 w-10 flex-shrink-0">
-                                    <img class="shadow rounded-full" src="{{cloudinary_url($message_user->profile_photo_path)??$message_user->profile_photo_url}}" alt="{{ $user->name }}" />
+                                    <a href="{{route('profile',$message_user->username)}}">
+                                        <img class="shadow rounded-full" src="{{cloudinary_url($message_user->profile_photo_path)??$message_user->profile_photo_url}}" alt="{{ $user->name }}" />
+                                    </a>
                                 </div>
                                 <div class="flex flex-col flex-grow ml-3">
                                     <div class="flex justify-between items-center gap-1">
-                                        <div class="text-sm font-medium">{{$message_user->name}}</div>
+                                        <div class="text-sm font-medium">
+                                            <a href="{{route('profile',$message_user->username)}}">
+                                                {{$message_user->name}}
+                                            </a>
+                                        </div>
 
                                         <div class="text-xs flex  mr-2 text-gray-300">
                                             <div>{{$message->created_at->diffForHumans()}}</div>
