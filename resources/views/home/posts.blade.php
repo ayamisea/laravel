@@ -18,7 +18,13 @@
                         <a href="{{route('profile',$post->user->username)}}">
                             <h2 class="font-bold text-base">{{ $post->user->name }}</h2>
                         </a>
-                        <p class="text-xs">{{ $post->created_at->diffForHumans()}} </p>
+                        <div class="sm:flex ">
+                            <p class="text-xs mr-1">{{ $post->created_at->diffForHumans()}} </p>
+                            @if($post->created_at != $post->updated_at)
+                                <p class="text-xs text-gray-400">(更新:{{ $post->updated_at->diffForHumans()}}) </p>
+                            @endif
+                        </div>
+                        
                     </div>
                 </div>
                 

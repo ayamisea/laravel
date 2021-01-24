@@ -17,7 +17,7 @@
                     </div>
                     <div class="flex gap-2 mt-3">
                         
-                        <button class="hover:bg-blue-50" type="submit" name="sort_type" value="0">按時間排序</button>
+                        <button class="hover:bg-blue-50" type="submit" name="sort_type" value="0">按編輯時間排序</button>
                         <span>|</span>
                         <button class="hover:bg-blue-50" type="submit" name="sort_type" value="1">按愛心數排序</button>
                         

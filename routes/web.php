@@ -22,8 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [FollowController::class,'showposts'])->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/search',[PostController::class,'search'] )->name('search');
