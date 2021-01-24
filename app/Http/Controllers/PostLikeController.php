@@ -12,7 +12,10 @@ class PostLikeController extends Controller
         $post->likes()->create([
             'user_id' => Auth::user()->id,
         ]);
-        return back();
+
+        $loc = '#post-'.$post->id;
+        
+        return redirect(url()->previous().$loc);
     }
     public function destroy(Post $post){
         Auth::user()->likes()->where('post_id',$post->id)->delete(); 

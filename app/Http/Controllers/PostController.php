@@ -98,7 +98,8 @@ class PostController extends Controller
             }
             
         }
-        return redirect()->route('home');
+        $loc = '#post-'.$post->id;
+        return redirect()->to(route('home').$loc);
     }
 
     public function search(Request $request){

@@ -15,7 +15,9 @@ class PostMessageController extends Controller
             'post_id' => $request->post_id,
             'content' => $request->content,
         ]);
-        return back();
+        $loc = '#post-'.$request->post_id;
+        
+        return redirect(url()->previous().$loc);
     }
     public function destroy(Message $message){
 

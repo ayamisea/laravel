@@ -1,10 +1,10 @@
 @if($posts->count())
     @foreach ($posts as $post)
-    <ul class="grid max-w-xl  h-auto w-auto rounded-sm mb-2 " x-data="{selected:null}">
+    <ul id="{{__('post-').$post->id}}" class="grid max-w-xl  h-auto w-auto rounded-sm mb-2 " x-data="{selected:null}">
     <li class="flex align-center flex-col">
     <div class="grid max-w-xl bg-white h-auto w-auto rounded-sm p-3 pb-1 pt-1 ">
         
-        <div class="place-self-start w-full">
+        <div  class="place-self-start w-full">
             <!--Author-->
             <div class="max-w-3xl flex  mb-3 justify-between">
                 <div class="flex items-stretch">
