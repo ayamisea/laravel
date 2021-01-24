@@ -31,11 +31,7 @@
                 
 
                 <div class="self-center flex gap-3 items-stretch">
-                    @auth
-                    @if(Auth::user()!==$user)
-                        <button class="self-center w-auto p-1 items-center justify-center rounded-md bg-gray-400 text-white text-xs" type="submit">追蹤</button>
-                    @endif
-                    @endauth
+    
                     <!-- Post Manipulation -->
                     @auth
                     @if($post->ownedBy(Auth::user()))
